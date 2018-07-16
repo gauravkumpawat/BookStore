@@ -37,6 +37,8 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'social.apps.django_app.default',
+    'registration',
     'store',
 )
 
@@ -64,12 +66,20 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'social.apps.django_app.context_processors.backends',
+                'social.apps.django_app.context_processors.login_redirect',
+
             ],
         },
     },
 ]
 
 WSGI_APPLICATION = 'bookstore.wsgi.application'
+
+AUTHENTICATION_BACKENDS=(
+    'social.backends.facebook.FacebookOAuth2',
+    'django.contrib.auth.backends.ModelBackend'
+)
 
 
 # Database
@@ -101,3 +111,20 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
 STATIC_URL = '/static/'
+
+ACCOUNT_ACTIVATION_DAYS = 7
+REGISTRATION_AUTO_LOGIN= True
+LOGIN_REDIRECT_URL = '/store/'
+HTTPS=True
+# Email setting
+EMAIL_BACKEND="django.core.mail.backends.smtp.EmailBackend"
+EMAIL_HOST= "smtp.gmail.com"
+EMAIL_HOST_USER = "akmca54@gmail.com"
+EMAIL_HOST_PASSWORD="@anand12345"
+EMAIL_PORT= 587
+EMAIL_USE_TLS = True
+DEFAULT_FROM_EMAIL = "bigdatailearn.com"
+
+# Facebook
+SOCIAL_AUTH_FACEBOOK_KEY='195857681079298'
+SOCIAL_AUTH_FACEBOOK_SECRET='d28da86266404934bba9e37ad0e7f273'
