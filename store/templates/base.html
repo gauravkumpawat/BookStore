@@ -1,0 +1,25 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %} Welcome to shubham books {% endblock %}</title>
+</head>
+<body background="{% static 'base/img/header_full.jpg' %}">
+{% block content %}
+{% if request.user.is_authenticated %}
+<h4>
+Welcome {% if request.user.first_name %}
+    {{request.user.first_name}}
+    {% else %}
+    {{request.user.username}}
+    {% endif %}!<a href="{% url 'auth_logout' %}">Logout</a>
+
+</h4>
+{% else %}
+ <h4>To continue Please <a href="{% url 'auth_login' %}">Login</a></h4>
+{% endif %}
+Welcome to This Bookstore: There are {{count}} books in store. User Location: {{request.session.location}}
+{% endblock %}
+</body>
+</html>
